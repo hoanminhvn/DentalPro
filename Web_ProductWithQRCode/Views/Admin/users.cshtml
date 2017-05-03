@@ -1,0 +1,387 @@
+﻿<div class="content">
+    <div class="container">
+        <!-- Page-Title -->
+        <div class="row">
+            <div class="col-sm-12">
+                <h4 class="page-title">Danh sách nhân viên</h4>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="/">Trang chủ</a>
+                    </li>
+                    <li>
+                        <a href="#">Nhân viên</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card-box">
+                    <div class="table-rep-plugin">
+                        <div class="table-wrapper">
+                            <div class="row">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div id="datatable-editable_filter" class="dataTables_filter">
+                                            <label class="col-sm-9">
+                                                <div class="input-group">
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn waves-effect waves-light btn-primary"><i class="fa fa-search"></i></button>
+                                                    </span>
+                                                    <input type="text" id="example-input1-group2" name="example-input1-group2" class="form-control" placeholder="Tìm kiếm theo tên, loại, mô tả,..." ng-model="search">
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <button type="button" class="btn btn-info waves-effect waves-light" data-toggle="modal" data-target="#insert" data-backdrop="static">
+                                            <span class="btn-label">
+                                                <i class="ti-plus"></i>
+                                            </span>Thêm mới
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <table id="tech-companies-1-clone" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>STT</th>
+                                            <th>Tên nhân viên</th>
+                                            <th>Điện thoại</th>
+                                            <th>Nhóm nhân viên</th>
+                                            <th>Chức năng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-if="LIST_USER === undefined">
+                                            <td colspan="6" style="text-align:center">
+                                                <img class="img-responsive" src="~/Assets/admin/images/sp-loading.gif" alt="Loading..." title="Loading..." style="margin:0 auto" />
+                                            </td>
+                                        </tr>
+                                        <tr dir-paginate="item in LIST_USER | filter:search | itemsPerPage: pageSize track by $index" current-page="currentPage">
+                                            <td colspan="1" ng-bind="(currentPage - 1) * pageSize + $index+1"></td>
+                                            <td colspan="1" ng-bind="item.name"></td>
+                                            <td colspan="1" ng-bind="item.phone"></td>
+                                            <td colspan="1" ng-bind="item.group"></td>
+                                            <td colspan="1">
+                                                <button type="button" class="btn btn-info" ng-click="detail(item)" data-toggle="modal" data-target="#detail" data-backdrop="static"><i class="fa fa-eye"></i></button>
+
+                                                <button type="button" class="btn btn-success" ng-click="detail(item)" data-toggle="modal" data-target="#update" data-backdrop="static"><i class="fa fa-edit"></i></button>
+
+                                                <button type="button" class="btn btn-danger" ng-click="delete(item.ID)" data-toggle="modal" data-target="#delete" data-backdrop="static"><i class="fa fa-remove"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <dir-pagination-controls></dir-pagination-controls>
+                                </div>
+                                <div class="col-sm-4 col-sm-offset-1">
+                                    <div class="dataTables_length" id="datatable-editable_length">
+                                        <label class="col-sm-6">Hiển thị</label>
+                                        <label class="col-sm-6">
+                                            <select name="datatable-editable_length" aria-controls="datatable-editable" class="form-control input-sm" onchange="angular.element(this).scope().displayItemsPerPage(this.value)">
+                                                <option value="5">5</option>
+                                                <option value="10">10</option>
+                                                <option value="15">15</option>
+                                                <option value="20">20</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- container -->
+</div>
+<div id="detail" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content p-0 b-0">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 class="panel-title">Thông tin nhân viên</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                Tên nhân viên: <label for="field-3" class="control-label"><span ng-bind="item_user.name"></span></label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                Ngày sinh: <label for="field-3" class="control-label"><span ng-bind="item_user.birthday | date:'dd-MM-yyyy'"></span></label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                Điện thoại: <label for="field-3" class="control-label"><span ng-bind="item_user.phone"></span></label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                Nhóm nhân viên: <label for="field-3" class="control-label"><span ng-bind="item_user.group"></span></label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                Giới tính: <label for="field-3" class="control-label"></label>
+                                <switcher class="styled"
+                                          ng-model="gender"
+                                          ng-disabled="isDisabled"
+                                          true-label="<img src='Assets/admin/images/male.png'>"
+                                          false-label="<img src='Assets/admin/images/female.png'>">
+                                </switcher>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                Tình trạng: <label for="field-2" class="control-label"></label>
+                                <switcher class="styled"
+                                          ng-model="status"
+                                          ng-disabled="isDisabled"
+                                          true-label="<img src='Assets/admin/images/lock-open.png'>"
+                                          false-label="<img src='Assets/admin/images/lock-close.png'>">
+                                </switcher>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <button type="button" class="btn btn-default btn-rounded waves-effect waves-light" data-dismiss="modal">
+                        <span class="btn-label"><i class="fa fa-close"></i></span>
+                        Đóng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End modal insert product cate-->
+<!--Modal insert user cate-->
+<div id="insert" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content p-0 b-0">
+            <form ng-submit="post(1)" name="frm_insert">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 class="panel-title">Thêm nhân viên mới</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label for="field-3" class="control-label">Tên đăng nhập: <font style="color:red">(*)</font></label>
+                                    <input type="text" class="form-control" name="username" placeholder="Nhập tên đăng nhập" ng-model="username" autofocus autocomplete="off" required>
+                                    <span class="error" ng-show="(frm_insert.username.$touched && frm_insert.username.$invalid && frm_insert.username.$error.required)">
+                                        Vui lòng nhập tên đăng nhập!!
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label for="field-3" class="control-label">Mật khẩu: <font style="color:red">(*)</font></label>
+                                    <input type="password" class="form-control" name="password" placeholder="Nhập mật khẩu" ng-model="password" autocomplete="off" required>
+                                    <span class="error" ng-show="(frm_insert.password.$touched && frm_insert.password.$invalid && frm_insert.password.$error.required)">
+                                        Vui lòng nhập mật khẩu!!
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="field-1" class="control-label">Tên nhân viên: </label>
+                                        <input type="text" class="form-control" name="fullname" placeholder="Nhập tên nhân viên" ng-model="fullname" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <label for="field-2" class="control-label">Giới tính: </label>
+                                        <switcher class="styled"
+                                                  ng-model="gender"
+                                                  ng-disabled="isDisabled"
+                                                  true-label="<img src='Assets/admin/images/male.png'>"
+                                                  false-label="<img src='Assets/admin/images/female.png'>">
+                                        </switcher>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label for="field-3" class="control-label">Ngày sinh:</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" name="birthday" placeholder="dd-mm-yyyy" id="birthday" ng-model="birthday" required>
+                                        <span class="input-group-addon bg-custom b-0 text-white"><i class="icon-calender"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label for="field-3" class="control-label">Điện thoại:</label>
+                                    <input type="text" class="form-control" name="phone" placeholder="Nhập điện thoại" ng-model="phone">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <label for="field-2" class="control-label">Tình trạng: </label>
+                                        <switcher class="styled"
+                                                  ng-model="status"
+                                                  ng-disabled="isDisabled"
+                                                  true-label="<img src='Assets/admin/images/lock-open.png'>"
+                                                  false-label="<img src='Assets/admin/images/lock-close.png'>">
+                                        </switcher>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label for="field-3" class="control-label">Nhóm nhân viên: <font style="color:red">(*)</font></label>
+                                    <select class="form-control" name="usertype" required ng-options="item.name for item in LIST_GROUPS_USER track by item.ID" ng-model="group">
+                                        <option value="">-- Lựa chọn một nhóm nhân viên --</option>
+                                    </select>
+                                    <span class="error" ng-show="(frm_insert.group.$touched && frm_insert.group.$invalid && frm_insert.group.$error.required)">
+                                        Vui lòng chọn nhóm nhân viên!!
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <button type="button" class="btn btn-default btn-rounded waves-effect waves-light" data-dismiss="modal">
+                            <span class="btn-label"><i class="fa fa-close"></i></span>
+                            Hủy
+                        </button>
+                        <button type="submit" class="btn btn-success btn-rounded waves-effect waves-light">
+                            <span class="btn-label"><i class="fa fa-check"></i></span>
+                            Lưu
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--End modal insert user cate-->
+<!--Modal update user cate-->
+<div id="update" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content p-0 b-0">
+            <form ng-submit="post(2)" name="frm_update">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 class="panel-title">Cập nhật thông tin nhân viên</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="field-1" class="control-label">Tên nhân viên: </label>
+                                        <input type="text" class="form-control" name="fullname" placeholder="Nhập tên nhân viên" ng-model="item_user.name" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="field-2" class="control-label">Giới tính: </label>
+                                    <switcher class="styled"
+                                              ng-model="gender"
+                                              ng-disabled="isDisabled"
+                                              true-label="<img src='Assets/admin/images/lock-open.png'>"
+                                              false-label="<img src='Assets/admin/images/lock-close.png'>">
+                                    </switcher>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label for="field-3" class="control-label">Ngày sinh:</label>
+                                    <input id="birthdayUP" type="text" class="form-control" name="birthday" placeholder="Nhập ngày sinh" ng-model="item_user.birthday">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label for="field-3" class="control-label">Điện thoại:</label>
+                                    <input type="text" class="form-control" name="phone" placeholder="Nhập điện thoại" ng-model="item_user.phone">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label for="field-2" class="control-label">Tình trạng: </label>
+                                    <switcher class="styled"
+                                              ng-model="status"
+                                              ng-disabled="isDisabled"
+                                              true-label="<img src='Assets/admin/images/lock-open.png'>"
+                                              false-label="<img src='Assets/admin/images/lock-close.png'>">
+                                    </switcher>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <label for="field-3" class="control-label">Nhóm nhân viên: <font style="color:red">(*)</font></label>
+                                    <select class="form-control" name="usertype" required ng-options="item.name for item in LIST_GROUPS_USER track by item.ID" ng-model="group">
+                                        <option value="">-- Lựa chọn một Nhóm nhân viên --</option>
+                                    </select>
+                                    <span class="error" ng-show="(frm_update.usertype.$touched && frm_update.usertype.$invalid && frm_update.usertype.$error.required)">
+                                        Vui lòng chọn loại nhân viên!!
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <button type="button" class="btn btn-default btn-rounded waves-effect waves-light" data-dismiss="modal">
+                            <span class="btn-label"><i class="fa fa-close"></i></span>
+                            Hủy
+                        </button>
+                        <button type="submit" class="btn btn-success btn-rounded waves-effect waves-light">
+                            <span class="btn-label"><i class="fa fa-check"></i></span>
+                            Lưu
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--End modal update user cate-->
+<!--Modal delete user cate-->
+<div id="delete" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content p-0 b-0">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 class="panel-title">Xóa nhân viên</h3>
+                </div>
+                <div class="panel-body">
+                    Bạn thật sự muốn xóa nhân viên này??
+                </div>
+                <div class="panel-footer">
+                    <button type="button" class="btn btn-default btn-rounded waves-effect waves-light" data-dismiss="modal">
+                        <span class="btn-label"><i class="fa fa-close"></i></span>
+                        Không
+                    </button>
+                    <button type="submit" class="btn btn-success btn-rounded waves-effect waves-light" ng-click="do_del()">
+                        <span class="btn-label"><i class="fa fa-check"></i></span>
+                        Có
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<flash-message>
+    <div class="my-flash"></div>
+</flash-message>

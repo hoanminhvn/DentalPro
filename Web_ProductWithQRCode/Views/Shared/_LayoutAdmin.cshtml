@@ -1,0 +1,80 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <base href="/" />
+    @*<link href="~/Assets/admin/plugins/morris/morris.css" rel="stylesheet" type="text/css">
+    <link href="~/Assets/admin/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Assets/admin/css/core.css" rel="stylesheet" type="text/css" />
+    <link href="~/Assets/admin/css/components.css" rel="stylesheet" type="text/css" />
+    <link href="~/Assets/admin/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="~/Assets/admin/css/pages.css" rel="stylesheet" type="text/css" />
+    <link href="~/Assets/admin/css/responsive.css" rel="stylesheet" type="text/css" />
+    <link href="~/Assets/admin/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Assets/admin/css/angular-switcher.css" rel="stylesheet" type="text/css" />
+    <link href="~/Assets/admin/plugins/custombox/css/custombox.css" rel="stylesheet">
+    <link href="~/Assets/admin/css/nv.d3.css" rel="stylesheet" type="text/css" />*@
+    @Styles.Render("~/bundles/admin/css")
+    <script src="~/Assets/admin/js/jquery.min.js"></script>
+    <script src="~/Assets/admin/js/angularjs/angular.min.js"></script>
+    <script src="~/Assets/admin/js/angularjs/angular-route.min.js"></script>
+    <script src="~/Assets/admin/js/angularjs/angular-pagination.js"></script>
+    <script src="~/Assets/admin/js/angularjs/angular-flash.min.js"></script>
+    <script src="~/Assets/admin/js/angularjs/angular-switcher.js"></script>
+    <script src="~/Assets/admin/js/angularjs/angular-md5.js"></script>
+    <script src="~/Assets/admin/js/angularjs/angular-autocomplete.js"></script>
+    <script src="~/Assets/admin/js/angularjs/checklist-model.js"></script>
+    <script src="~/Assets/admin/js/angularjs/chart.js"></script>
+    <script src="~/Assets/admin/js/angularjs/angular-chart.min.js"></script>
+    <script src="~/Assets/admin//js/angularjs/angular-ckeditor.min.js"></script>
+    
+    <script src="~/Assets/admin/js/angularjs/qrcode.js"></script>
+    <script src="~/Assets/admin/js/angularjs/angular-qr.min.js"></script>
+    <script src="~/Assets/admin/js/modernizr.min.js"></script>
+</head>
+
+<body>
+    <div>
+        @RenderBody()
+    </div>
+    <script src="~/Assets/admin/plugins/ckeditor/ckeditor.js"></script>
+    <script src="~/Assets/admin/plugins/ckfinder/ckfinder.js"></script>
+
+    <script src="~/Assets/admin/application/factory/MyFactory.js"></script>
+    <script src="~/Assets/admin/application/directives/directives.js"></script>
+    <script src="~/Assets/admin/application/controllers/HomeController.js"></script>
+    <script src="~/Assets/admin/application/controllers/CategoriesController.js"></script>
+    <script src="~/Assets/admin/application/controllers/products/ListProController.js"></script>
+    <script src="~/Assets/admin/application/controllers/products/NewProController.js"></script>
+    <script src="~/Assets/admin/application/controllers/products/UpdateProController.js"></script>
+    <script src="~/Assets/admin/application/controllers/UsersController.js"></script>
+
+    <script src="~/Assets/admin/application/AdminApp.js"></script>
+
+    <script src="~/Assets/admin/js/bootstrap.min.js"></script>
+    <script src="~/Assets/admin/js/detect.js"></script>
+    <script src="~/Assets/admin/js/fastclick.js"></script>
+    <script src="~/Assets/admin/js/jquery.slimscroll.js"></script>
+    <script src="~/Assets/admin/js/jquery.blockUI.js"></script>
+    <script src="~/Assets/admin/js/waves.js"></script>
+    <script src="~/Assets/admin/js/wow.min.js"></script>
+    <script src="~/Assets/admin/js/jquery.nicescroll.js"></script>
+    <script src="~/Assets/admin/js/jquery.scrollTo.min.js"></script>
+    <script src="~/Assets/admin/plugins/peity/jquery.peity.min.js"></script>
+    <script src="~/Assets/admin/plugins/custombox/js/custombox.min.js"></script>
+   
+    <!-- jQuery  -->
+    <script src="~/Assets/admin/plugins/waypoints/lib/jquery.waypoints.js"></script>
+    <script src="~/Assets/admin/plugins/counterup/jquery.counterup.min.js"></script>
+    <script src="~/Assets/admin/plugins/morris/morris.min.js"></script>
+    <script src="~/Assets/admin/plugins/raphael/raphael-min.js"></script>
+    <script src="~/Assets/admin/plugins/jquery-knob/jquery.knob.js"></script>
+    <script src="~/Assets/admin/pages/jquery.dashboard.js"></script>
+    <script src="~/Assets/admin/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/Assets/admin/js/jquery.core.js"></script>
+    <script src="~/Assets/admin/js/jquery.app.js"></script>
+</body>
+</html>

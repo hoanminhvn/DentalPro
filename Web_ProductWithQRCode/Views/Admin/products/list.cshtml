@@ -1,0 +1,217 @@
+﻿<div class="content">
+    <div class="container">
+        <!-- Page-Title -->
+        <div class="row">
+            <div class="col-sm-12">
+                <h4 class="page-title">Danh sách sản phẩm</h4>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="/">Trang chủ</a>
+                    </li>
+                    <li>
+                        <a href="#">Sản phẩm</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card-box">
+                    <div class="table-rep-plugin">
+                        <div class="table-wrapper">
+                            <div class="row">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div id="datatable-editable_filter" class="dataTables_filter">
+                                            <label class="col-sm-9">
+                                                <div class="input-group">
+                                                    <span class="input-group-btn">
+                                                        <button type="button" class="btn waves-effect waves-light btn-primary"><i class="fa fa-search"></i></button>
+                                                    </span>
+                                                    <input type="text" id="example-input1-group2" name="example-input1-group2" class="form-control" placeholder="Tìm kiếm theo tên, loại, mô tả,..." ng-model="search">
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <a href="/admin/new-product">
+                                            <button type="button" class="btn btn-info waves-effect waves-light">
+                                                <span class="btn-label">
+                                                    <i class="ti-plus"></i>
+                                                </span>Thêm mới
+                                            </button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <ul class="nav nav-tabs navtab-bg nav-justified">
+                        <li class="active" style="width:0%">
+                            <a href="#active" data-toggle="tab" aria-expanded="true">
+                                <span class="visible-xs"><i class="fa fa-home"></i></span>
+                                <span class="hidden-xs">Hoạt động</span>
+                            </a>
+                        </li>
+                        <li class="" style="width:0%">
+                            <a href="#recycle" data-toggle="tab" aria-expanded="false">
+                                <span class="visible-xs"><i class="fa fa-user"></i></span>
+                                <span class="hidden-xs">Thùng rác</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" style="padding:15px;">
+                        <div class="tab-pane active" id="active">
+                            <table id="tech-companies-1-clone" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <label for="checkbox11" ng-click="checkAll()">
+                                                Chọn
+                                            </label>
+                                        </th>
+                                        <th>STT</th>
+                                        <th>Hình đại diện</th>
+                                        <th>QRCode</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Chức năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-if="LIST_PRODUCTS === undefined">
+                                        <td colspan="6" style="text-align:center">
+                                            <img class="img-responsive" src="~/Assets/admin/images/sp-loading.gif" alt="Loading..." title="Loading..." style="margin:0 auto" />
+                                        </td>
+                                    </tr>
+                                    <tr dir-paginate="item in LIST_PRODUCTS | filter:{Status:true, Name: search} | itemsPerPage: pageSize track by $index" current-page="currentPage" pagination-id="active">
+                                        <td colspan="1">
+                                            <div class="checkbox checkbox-custom">
+                                                <input id="chk-{{item.ID}}" type="checkbox" ng-checked="isChecked(item.ID)" ng-click="checkItem(item.ID, checked)">
+                                                <label for="chk-{{item.ID}}"></label>
+                                            </div>
+                                        </td>
+                                        <td colspan="1" ng-bind="(currentPage - 1) * pageSize + $index+1"></td>
+                                        <td colspan="1">
+                                            <img class="img-responsive" ng-src="{{item.Image}}" alt="Alternate Text" style="width:100px; height:auto" />
+                                        </td>
+                                        <td colspan="1">
+                                            <img class="img-responsive" ng-src="{{item.QRCode}}" alt="Alternate Text" style="width:100px; height:auto" />
+                                        </td>
+                                        <td colspan="1" ng-bind="item.Name"></td>
+                                        <td colspan="1">
+                                            <a href="admin/update-product/{{item.ID}}">
+                                                <button type="button" class="btn btn-success"><i class="fa fa-edit"></i></button>
+                                            </a>
+                                            <button type="button" class="btn btn-danger" ng-click="delete(item.ID)" data-toggle="modal" data-target="#delete" data-backdrop="static"><i class="fa fa-remove"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="row">
+                                <div class="pull-right">
+                                    <dir-pagination-controls pagination-id="active"></dir-pagination-controls>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="recycle">
+                            <table id="tech-companies-1-clone" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" name="name" value=" " /></th>
+                                        <th>STT</th>
+                                        <th>Hình đại diện</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Đường dẫn tĩnh</th>
+                                        <th>Danh mục</th>
+                                        <th>Chức năng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-if="LIST_CATEGORIES === undefined">
+                                        <td colspan="6" style="text-align:center">
+                                            <img class="img-responsive" src="~/Assets/admin/images/sp-loading.gif" alt="Loading..." title="Loading..." style="margin:0 auto" />
+                                        </td>
+                                    </tr>
+                                    <tr dir-paginate="item in LIST_PRODUCTS | filter:{Status:false,Name: search}  | itemsPerPage: pageSize track by $index" current-page="currentPage" pagination-id="inactive">
+                                        <td><input id="chk-{{item.ID}}" type="checkbox" name="name" value=" " /></td>
+                                        <td colspan="1" ng-bind="(currentPage - 1) * pageSize + $index+1"></td>
+                                        <td colspan="1">
+                                            <img class="img-responsive" ng-src="{{item.Image}}" alt="Alternate Text" style="width:100px; height:auto" />
+                                        </td>
+                                        <td colspan="1" ng-bind="item.Name"></td>
+                                        <td colspan="1" ng-bind="item.Meta"></td>
+                                        <td colspan="1" ng-bind="item.CateName"></td>
+                                        <td colspan="1">
+                                            <button type="button" class="btn btn-success" ng-click="detail(item)" data-toggle="modal" data-target="#update" data-backdrop="static"><i class="fa fa-edit"></i></button>
+
+                                            <button type="button" class="btn btn-danger" ng-click="delete(item.ID)" data-toggle="modal" data-target="#delete" data-backdrop="static"><i class="fa fa-remove"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="row">
+                                <div class="pull-right">
+                                    <dir-pagination-controls pagination-id="inactive"></dir-pagination-controls>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="pull-left" style="margin:20px 0px;">
+                                <div class="col-sm-6">
+                                    <select class="form-control" onchange="angular.element(this).scope().actionChecked(this.value)">
+                                        <option value="">-- Hành động --</option>
+                                        <option value="1">Bỏ vào thùng rác</option>
+                                        <option value="2">Xóa vĩnh viễn</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="col-sm-6">Hiển thị</label>
+                                    <label class="col-sm-6">
+                                        <select name="datatable-editable_length" aria-controls="datatable-editable" class="form-control input-sm" onchange="angular.element(this).scope().displayItemsPerPage(this.value)">
+                                            <option value="5">5</option>
+                                            <option value="10" selected>10</option>
+                                            <option value="15">15</option>
+                                            <option value="20">20</option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal delete product cate-->
+<div id="delete" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content p-0 b-0">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 class="panel-title">Xóa sản phẩm</h3>
+                </div>
+                <div class="panel-body">
+                    Bạn thật sự muốn xóa sản phẩm này??
+                </div>
+                <div class="panel-footer">
+                    <button type="button" class="btn btn-default btn-rounded waves-effect waves-light" data-dismiss="modal">
+                        <span class="btn-label"><i class="fa fa-close"></i></span>
+                        Không
+                    </button>
+                    <button type="submit" class="btn btn-success btn-rounded waves-effect waves-light" ng-click="do_del()">
+                        <span class="btn-label"><i class="fa fa-check"></i></span>
+                        Có
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End modal delete product cate-->
+<flash-message>
+    <div class="my-flash"></div>
+</flash-message>

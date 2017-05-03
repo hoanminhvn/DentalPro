@@ -1,0 +1,466 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+    ViewBag.Title = ViewBag.Product.Name;
+}
+<div class="ybc_full_bg_breadcrum">
+    <div class="container">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb clearfix">
+            <a class="home" href="/" title="Return to Home">Trang chủ</a><span class="navigation-pipe">&gt;</span>
+            <span class="navigation_page">
+                @if (ViewBag.Categories.Count > 0)
+                {
+                    foreach (var item in ViewBag.Categories)
+                    {
+                <a itemprop="url" href="@item.Meta" title="@item.Name">
+                    <span itemprop="title">@item.Name</span>
+                </a>
+                    }
+                }
+            </span>
+            <span class="navigation-pipe">&gt;</span>@ViewBag.Product.Name
+        </div>
+    </div>
+</div>
+<div id="columns" class="container">
+    <div class="row">
+        <div id="center_column" class="center_column col-xs-12 col-sm-9">
+            <div itemscope="" itemtype="https://schema.org/Product">
+                <meta itemprop="url" content="http://demo.etssoft.net/digital/en/apples/3-printed-dress.html">
+                <div class="primary_block row product_layout_2">
+                    <div class="container">
+                        <div class="top-hr"></div>
+                    </div>
+                    <!-- left infos-->
+                    <div class="pb-left-column col-xs-12 col-sm-6 col-md-6">
+                        <!-- product img-->
+                        <div id="image-block" class="clearfix">
+                            <span class="new-box">
+                                <span class="new-label">New</span>
+                            </span>
+                            <span id="view_full_size">
+                                <img id="bigpic" itemprop="image" src="@ViewBag.Product.Image" title="@ViewBag.Product.Name" alt="@ViewBag.Product.Name" width="750" height="750">
+                                <span class="span_link no-print"></span>
+                            </span>
+                        </div> <!-- end image-block -->
+                        <!-- thumbnails -->
+                        <div id="views_block" class="clearfix ">
+                            <span class="view_scroll_spacer">
+                                <a id="view_scroll_left" class="" title="Other views" href="javascript:{}" style="cursor: default; opacity: 0; display: none;">
+                                    Previous
+                                </a>
+                            </span>
+                            <div id="thumbs_list">
+                                <ul id="thumbs_list_frame">
+                                    @if (ViewBag.ListImage != null)
+                                    {
+                                        for (int i = 0; i < ViewBag.ListImage.Length; i++)
+                                        {
+                                            <li id="thumbnail_@i">
+                                                <a href="@ViewBag.ListImage[i]" data-fancybox-group="other-views" class="fancybox shown" title="Lorem ipsum dolor">
+                                                    <img class="img-responsive" id="thumb_@i" src="@ViewBag.ListImage[i]" alt="Lorem ipsum dolor" title="@ViewBag.Product.Name" height="140" width="140" itemprop="image" />
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                            <a id="view_scroll_right" title="Other views" href="javascript:{}" style="cursor: default; opacity: 0; display: none;">
+                                Next
+                            </a>
+                        </div> <!-- end views-block -->
+                        <!-- end thumbnails -->
+                        <p class="resetimg clear no-print">
+                            <span id="wrapResetImages" style="display: none;">
+                                <a href="#" data-id="resetImages">
+                                    <i class="icon-repeat"></i>
+                                    Display all pictures
+                                </a>
+                            </span>
+                        </p>
+                    </div> <!-- end pb-left-column -->
+                    <!-- end left infos-->
+                    <!-- center infos -->
+                    <div class="pb-center-column col-xs-12 col-sm-6">
+                        <h1 itemprop="name">@ViewBag.Product.Name</h1>
+                        
+                        <div class="content_prices clearfix">
+                            <!-- prices -->
+                            <div>
+                                <p class="our_price_display" itemprop="offers" itemscope="" itemtype="https://schema.org/Offer"><link itemprop="availability" href="https://schema.org/InStock"><span id="our_price_display" class="price" itemprop="price" content="25.999852">@string.Format("{0:C0}", ViewBag.Product.Price)</span><meta itemprop="priceCurrency" content="USD"></p>
+                                <p id="old_price" class="hidden" style="display: none;"><span id="old_price_display" style="display: none;"><span class="old-price product-price"></span></span></p>
+                            </div> <!-- end prices -->
+                            <div class="clear"></div>
+                        </div> <!-- end content_prices -->
+
+                        <div id="short_description_block">
+                            <div id="short_description_content" class="rte align_justify" itemprop="description"><p>@ViewBag.Product.Intro</p></div>
+
+                            <p class="buttons_bottom_block">
+                                <a href="javascript:{}" class="button">
+                                    More details
+                                </a>
+                            </p>
+                            <!---->
+                        </div> <!-- end short_description_block -->
+                        <!-- availability or doesntExist -->
+
+                        <form id="buy_block" action="http://demo.etssoft.net/digital/en/cart" method="post">
+                            <!-- hidden datas -->
+                            <p class="hidden">
+                                <input type="hidden" name="token" value="dbbedd8ed700d9ef761f48e09e12c6f0">
+                                <input type="hidden" name="id_product" value="3" id="product_page_product_id">
+                                <input type="hidden" name="add" value="1">
+                                <input type="hidden" name="id_product_attribute" id="idCombination" value="13">
+                            </p>
+                            @*<div class="box-info-product">
+                                <div class="product_attributes clearfix">
+                                    <!-- quantity wanted -->
+                                    <!-- attributes -->
+                                    <div id="attributes">
+                                        <div class="clearfix"></div>
+                                        <fieldset class="attribute_fieldset">
+                                            <label class="attribute_label" for="group_1">Size&nbsp;</label>
+                                            <div class="attribute_list">
+                                                <div class="selector" id="uniform-group_1" style="width: 129px;">
+                                                    <span style="width: 117px; user-select: none;">S</span><select name="group_1" id="group_1" class="form-control attribute_select no-print">
+                                                        <option value="1" selected="selected" title="S">S</option>
+                                                        <option value="2" title="M">M</option>
+                                                        <option value="3" title="L">L</option>
+                                                    </select>
+                                                </div>
+                                            </div> <!-- end attribute_list -->
+                                        </fieldset>
+                                        <fieldset class="attribute_fieldset">
+                                            <label class="attribute_label attribute_label_color">Color&nbsp;</label>
+                                            <div class="attribute_list">
+                                                <ul id="color_to_pick_list" class="clearfix">
+                                                    <li class="selected">
+                                                        <a href="http://demo.etssoft.net/digital/en/apples/3-printed-dress.html" id="color_13" class="color_pick color_Orange selected" style="background:#F39C11;" title="Orange">
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                <input type="hidden" class="color_pick_hidden" name="group_3" value="13">
+                                            </div> <!-- end attribute_list -->
+                                        </fieldset>
+                                    </div> <!-- end attributes -->
+                                    <p id="quantity_wanted_p">
+                                        <label for="quantity_wanted">Quantity</label>
+                                        <input type="number" min="1" name="qty" id="quantity_wanted" class="text" value="1">
+                                        <a href="#" data-field-qty="qty" class="btn btn-default button-minus product_quantity_down">
+                                            <span><i class="icon-angle-down"></i></span>
+                                        </a>
+                                        <a href="#" data-field-qty="qty" class="btn btn-default button-plus product_quantity_up">
+                                            <span><i class="icon-angle-up"></i></span>
+                                        </a>
+                                        <span class="clearfix"></span>
+                                    </p>
+                                    <div class="box-cart-bottom">
+                                        <div>
+                                            <p id="add_to_cart" class="buttons_bottom_block no-print">
+                                                <button type="submit" name="Submit" class="exclusive button">
+                                                    <span>Add to cart</span>
+                                                </button>
+                                            </p>
+                                        </div>
+                                    </div> <!-- end box-cart-bottom -->
+                                    <!-- minimal quantity wanted -->
+                                    <p id="minimal_quantity_wanted_p" style="display: none;">
+                                        The minimum purchase order quantity for the product is <b id="minimal_quantity_label">1</b>
+                                    </p>
+                                </div> <!-- end product_attributes -->
+
+                            </div>*@ <!-- end box-info-product -->
+                        </form>
+                        <ul class="box-sharing-button">
+                            <li class="buttons_bottom_block no-print">
+                                <a id="wishlist_button_nopop" href="#" onclick="WishlistCart('wishlist_block_list', 'add', '3', $('#idCombination').val(), document.getElementById('quantity_wanted').value); return false;" rel="nofollow" title="Add to my wishlist">
+                                    Thêm vào danh sách ưa thích
+                                </a>
+                            </li>
+
+                            <li class="sendtofriend">
+                                <a id="send_friend_button" href="#send_friend_form">
+                                    Chia sẻ cho bạn bè
+                                </a>
+                                <div style="display: none;">
+                                    <div id="send_friend_form">
+                                        <h2 class="page-subheading">
+                                            Send to a friend
+                                        </h2>
+                                        <div class="row">
+                                            <div class="product clearfix col-xs-12 col-sm-6">
+                                                <img src="http://demo.etssoft.net/digital/26-home_default/printed-dress.jpg" height="450" width="450" alt="Lorem ipsum dolor">
+                                                <div class="product_desc">
+                                                    <p class="product_name">
+                                                        <strong>Lorem ipsum dolor</strong>
+                                                    </p>
+                                                    <p>100% cotton double printed dress. Black and white striped top and orange high waisted skater skirt bottom.</p>
+                                                </div>
+                                            </div><!-- .product -->
+                                            <div class="send_friend_form_content col-xs-12 col-sm-6" id="send_friend_form_content">
+                                                <div id="send_friend_form_error"></div>
+                                                <div id="send_friend_form_success"></div>
+                                                <div class="form_container">
+                                                    <p class="intro_form">
+                                                        Recipient :
+                                                    </p>
+                                                    <p class="text">
+                                                        <label for="friend_name">
+                                                            Name of your friend <sup class="required">*</sup> :
+                                                        </label>
+                                                        <input id="friend_name" name="friend_name" type="text" value="">
+                                                    </p>
+                                                    <p class="text">
+                                                        <label for="friend_email">
+                                                            E-mail address of your friend <sup class="required">*</sup> :
+                                                        </label>
+                                                        <input id="friend_email" name="friend_email" type="text" value="">
+                                                    </p>
+                                                    <p class="txt_required">
+                                                        <sup class="required">*</sup> Required fields
+                                                    </p>
+                                                </div>
+                                                <p class="submit">
+                                                    <button id="sendEmail" class="btn button button-small" name="sendEmail" type="submit">
+                                                        <span>Send</span>
+                                                    </button>&nbsp;
+                                                    or&nbsp;
+                                                    <a class="closefb" href="#">
+                                                        Cancel
+                                                    </a>
+                                                </p>
+                                            </div> <!-- .send_friend_form_content -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="print">
+                                <a href="javascript:print();">Print</a>
+                            </li>
+                        </ul>
+                        <ul id="usefull_link_block" class="socialsharing_product list-inline" style="text-align: center">
+                            <li class="title_social_sharing">
+                                Chia sẻ
+                            </li>
+                            <li>
+                                <button data-type="twitter" type="button" class="btn btn-default btn-twitter social-sharing">
+                                    <i class="fa fa-twitter" ></i>
+                                    <i class="fa fa-twitter icon-hover"></i>
+                                    Tweet
+                                    <!-- <img src="http://demo.etssoft.net/digital/modules/socialsharing/img/twitter.gif" alt="Tweet" /> -->
+                                </button>
+                            </li>
+                            <li>
+                                <button data-type="facebook" type="button" class="btn btn-default btn-facebook social-sharing">
+                                    <i class="fa fa-facebook-f"></i>
+                                    <i class="fa fa-facebook-f icon-hover"></i> Share
+                                    <!-- <img src="http://demo.etssoft.net/digital/modules/socialsharing/img/facebook.gif" alt="Facebook Like" /> -->
+                                </button>
+                            </li>
+                            <li>
+                                <button data-type="google-plus" type="button" class="btn btn-default btn-google-plus social-sharing">
+                                    <i class="fa fa-google-plus"></i>
+                                    <i class="fa fa-google-plus icon-hover"></i> Google+
+                                    <!-- <img src="http://demo.etssoft.net/digital/modules/socialsharing/img/google.gif" alt="Google Plus" /> -->
+                                </button>
+                            </li>
+                            <li class="product_comments_block_extra no-print" itemprop="aggregateRating" itemscope="" itemtype="https://schema.org/AggregateRating">
+
+                                <!-- .comments_note -->
+
+                                <ul class="comments_advices">
+                                    <li class="comments_note">
+                                        <div class="star_content">
+                                            <div class="star star_on"></div>
+                                            <div class="star star_on"></div>
+                                            <div class="star star_on"></div>
+                                            <div class="star"></div>
+                                            <div class="star"></div>
+                                            <meta itemprop="worstRating" content="0">
+                                            <meta itemprop="ratingValue" content="3">
+                                            <meta itemprop="bestRating" content="5">
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a href="#idTab5" class="reviews">
+                                            <span itemprop="reviewCount">1 </span>reviews
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="open-comment-form" href="#new_comment_form">
+                                            Write your review
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!--  /Module ProductComments -->
+                            <!-- usefull links-->
+                        </ul>
+                        <p id="availability_statut">
+                            <label>Từ khóa: </label>
+                            @for (int i = 1; i < ViewBag.ListTag.Length-1; i++)
+                            {
+                                var arr = ViewBag.ListTag[i].Split('|');
+                                <span id="availability_value" class="label label-success">
+                                    <a href="@arr[1]">@arr[0]</a>,
+                                </span>
+                            }
+                        </p>
+                    </div>
+                    <!-- end center infos-->
+                </div> <!-- end primary_block -->
+                <div id="tab_product_page">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#product_description" aria-controls="product_description" role="tab" data-toggle="tab">
+                                <span>Chi tiết</span>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#product_featured" aria-controls="product_featured" role="tab" data-toggle="tab">
+                                <span>Phụ kiện</span>
+                            </a>
+                        </li>
+
+                        <li role="presentation">
+                            <a href="#idTab5" aria-controls="idTab5" role="tab" data-toggle="tab">
+                                <span>Gửi liên hệ</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <!-- More info -->
+                        <section class="page-product-box tab-pane active" id="product_description">
+                            <h2 style="display:none">product description</h2>
+                            <!-- full description -->
+                            <div class="rte">@Html.Raw(ViewBag.Product.Content)</div>
+                        </section>
+                        <!--end  More info -->
+                        <!-- Data sheet -->
+                        <section class="page-product-box tab-pane" id="product_featured">
+                            <h2 style="display:none">product featured</h2>
+                            //Danh sách phụ kiện đi kèm
+                        </section>
+                        <section id="idTab5" class="page-product-box tab-pane">
+                            <h2 style="display:none">Review</h2>
+                            <button type="button" class="btn btn-primary">Gửi liên hệ</button>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div><!-- #center_column -->
+        <div class="col-lg-3 col-md-3">
+            <div class="so-panel widget widget_text">
+                <div class="sb-widget panel-widget-style">
+                    <h3 class="widget-title">Hỗ trợ trực tuyến</h3>
+                    <div class="textwidget" style="float:left; padding:0px;">
+                        <ul class="uleft">
+                            <li class="ar-yahoo-item w-clear">
+                                <div class="img fl-l">
+                                    <img src="~/Assets/client/images/support-icon.png" alt="Yahoo">
+                                </div>
+                                <div class="yahoo-item fl-r">
+                                    <div class="name">
+                                        Đức Trưởng <a href="skype:?call"><img src="~/Assets/client/images/s.png" alt="Skype">    </a><a href="ymsgr:sendim?"><img src="~/Assets/client/images/y.png" alt="Yahoo">   </a> <a href="sms:0942307407"><img src="~/Assets/client/images/sms.png" alt="sms">   </a>
+                                    </div>
+                                    <div class="phone">
+                                        0942 307 407
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="ar-yahoo-item w-clear">
+                                <div class="img fl-l">
+                                    <img src="~/Assets/client/images/support-icon.png" alt="Yahoo">
+                                </div>
+                                <div class="yahoo-item fl-r">
+                                    <div class="name">
+                                        Nguyễn Hải <a href="skype:?call"><img src="~/Assets/client/images/s.png" alt="Skype">    </a><a href="ymsgr:sendim?"><img src="~/Assets/client/images/y.png" alt="Yahoo">   </a> <a href="sms:0978800936"><img src="~/Assets/client/images/sms.png" alt="sms">   </a>
+                                    </div>
+                                    <div class="phone">
+                                        0978 800 936
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="ar-yahoo-item w-clear">
+                                <div class="img fl-l">
+                                    <img src="~/Assets/client/images/support-icon.png" alt="Yahoo">
+                                </div>
+                                <div class="yahoo-item fl-r">
+                                    <div class="name">
+                                        Bảo Hân <a href="skype:?call"><img src="~/Assets/client/images/s.png" alt="Skype">    </a><a href="ymsgr:sendim?"><img src="~/Assets/client/images/y.png" alt="Yahoo">   </a> <a href="sms:01257839729"><img src="~/Assets/client/images/sms.png" alt="sms">   </a>
+                                    </div>
+                                    <div class="phone">
+                                        0125 783 9729
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="ar-yahoo-item w-clear">
+                                <div class="img fl-l">
+                                    <img src="~/Assets/client/images/support-icon.png" alt="Yahoo">
+                                </div>
+                                <div class="yahoo-item fl-r">
+                                    <div class="name">
+                                        Thùy Dương <a href="skype:?call"><img src="~/Assets/client/images/s.png" alt="Skype">    </a><a href="ymsgr:sendim?"><img src="~/Assets/client/images/y.png" alt="Yahoo">   </a> <a href="sms:0903074411"><img src="~/Assets/client/images/sms.png" alt="sms">   </a>
+                                    </div>
+                                    <div class="phone">
+                                        0903 07 4411
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="so-panel widget widget_text">
+                <div class="sb-widget panel-widget-style">
+                    <h3 class="widget-title">Tin tức mới nhất</h3>
+                    <div class="textwidget">
+                        <div class="row" style="margin:0px;">
+                            <div class="col-sm-4" style="padding:5px;">
+                                <img src="~/upload/Images/tptdental-hoat-dong-tu-thien.jpg" alt="Alternate Text" />
+                            </div>
+                            <div class="col-sm-8" style="padding:5px;">
+                                <h5>Hoạt động từ thiện của công ty quý II</h5>
+                            </div>
+                        </div>
+                        <div class="row" style="margin:0px;">
+                            <div class="col-sm-4" style="padding:5px;">
+                                <img src="~/upload/Images/tptdental-viem-quanh-rang-nho.jpg" alt="Alternate Text" />
+                            </div>
+                            <div class="col-sm-8" style="padding:5px;">
+                                <h5>Phòng tránh bệnh viêm quanh răng</h5>
+                            </div>
+                        </div>
+                        <div class="row" style="margin:0px;">
+                            <div class="col-sm-4" style="padding:5px;">
+                                <img src="~/upload/Images/tptdental_top-7-thuc-pham-giu-cho-rang-khoe-manh-nh.jpg" alt="Alternate Text" />
+                            </div>
+                            <div class="col-sm-8" style="padding:5px;">
+                                <h5>Top 7 thực phẩm giữ cho răng khỏe mạnh</h5>
+                            </div>
+                        </div>
+                        <div class="row" style="margin:0px;">
+                            <div class="col-sm-4" style="padding:5px;">
+                                <img src="~/upload/Images/tptdental-nhat-nam-va-quang-anh-cung-ps-bao-ve-nu-cuoi-viet-nam4-nho.jpg" alt="Alternate Text" />
+                            </div>
+                            <div class="col-sm-8" style="padding:5px;">
+                                <h5>Nhật Nam và Quang Anh cùng P/S Bảo vệ nụ cười Việt Nam</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="so-panel widget widget_text">
+                <div class="sb-widget panel-widget-style">
+                    <h3 class="widget-title">Facebook fanpage</h3>
+                    <div class="textwidget">
+                        <div class="fb-page" data-href="https://www.facebook.com/tptmiennam/?fref=ts" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/tptmiennam/?fref=ts" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/tptmiennam/?fref=ts">Công Ty TNHH TMDV Trang Thiết Bị Y Tế TPT Miền Nam</a></blockquote></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!-- .row -->
+</div>

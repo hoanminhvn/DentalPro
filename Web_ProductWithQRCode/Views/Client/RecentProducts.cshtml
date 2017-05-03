@@ -1,0 +1,88 @@
+﻿@model List<Web_ProductWithQRCode.Core.Entity.Products>
+<div class="home-block-section">
+    <h4 class="title-home"><span>Sản phẩm mới nhất</span></h4>
+    <!-- Products list -->
+    <ul id="homefeatured" class="product_list grid row homefeatured">
+        @foreach (var item in Model)
+        {
+            <li class="wow zoomIn item ajax_block_product col-xs-12 col-sm-3 col-md-3 first-in-line first-item-of-tablet-line first-item-of-mobile-line">
+                <div class="product-container" itemscope itemtype="https://schema.org/Product">
+                    <div class="left-block">
+                        <div class="product-image-container">
+                            <a class="product_img_link" href="@item.Meta" title="Lorem ipsum dolor" itemprop="url">
+                                <img class="replace-2x img-responsive" src="@item.Image" alt="Lorem ipsum dolor" title="@item.Name" width="450" height="450" itemprop="image" />
+                            </a>
+                            <a class="new-box" href="">
+                                <span class="new-label">New</span>
+                            </a>
+                            <div class="button-container-product">
+                                <div class="functional-buttons clearfix" data-toggle="tooltip" data-placement="left" title="Add to Wishlist">
+                                    <div class="wishlist" title="Add to Wishlist">
+                                        <a class="addToWishlist wishlistProd_1" href="#" data-rel="1" onclick="WishlistCart('wishlist_block_list', 'add', '1', false, 1); return false;">
+                                            Add to Wishlist
+                                        </a>
+                                    </div>
+                                </div>
+                                <a class="quick-view" data-toggle="tooltip" title="Quick view" data-placement="left" href="@item.Meta" data-url="@item.Meta">
+                                    <span>Quick view</span>
+                                </a>
+                                <div class="compare" data-toggle="tooltip" data-placement="left" title="Add to Compare">
+                                    <a class="add_to_compare" href="@item.Meta" data-id-product="1">
+                                        Add to Compare
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-block">
+                        <h5 itemprop="name">
+                            <a class="product-name" href="@item.Meta" title="@item.Name" itemprop="url">
+                                @item.Name
+                            </a>
+                        </h5>
+                        <div class="content_price">
+                            @if (item.Discount > 0)
+                            {
+                                <span class="price product-price">
+                                    @string.Format("{0:C0}", item.Discount)
+                                </span>
+                                <span class="old-price product-price">
+                                    @string.Format("{0:C0}", item.Price)
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="price product-price">
+                                    @string.Format("{0:C0}", item.Price)
+                                </span>
+                            }
+                            <div class="hook-reviews">
+                                <div class="comments_note" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                                    <div class="star_content clearfix">
+                                        <div class="star star_on"></div>
+                                        <div class="star star_on"></div>
+                                        <div class="star star_on"></div>
+                                        <div class="star star_on"></div>
+                                        <div class="star"></div>
+                                        <meta itemprop="worstRating" content="0" />
+                                        <meta itemprop="ratingValue" content="4" />
+                                        <meta itemprop="bestRating" content="5" />
+                                    </div>
+                                    <span class="nb-comments"><span itemprop="reviewCount">1</span> Review(s)</span>
+                                </div>
+                            </div>
+                            <span class="price-percent-reduction ">
+                                Buy now to save 10%
+                            </span>
+                        </div>
+                        <div class="button_addtocart">
+                            <a class="button ajax_add_to_cart_button btn btn-default" data-toggle="tooltip" data-placement="left" href="/digital/en/cart?add=1&amp;id_product=1&amp;ipa=1&amp;token=dbbedd8ed700d9ef761f48e09e12c6f0" rel="nofollow" title="Add to cart" data-id-product-attribute="1" data-id-product="1" data-minimal_quantity="1">
+                                <span>Thêm vào giỏ</span>
+                            </a>
+                        </div>
+                    </div>
+                </div><!-- .product-container> -->
+            </li>
+        }
+    </ul>
+</div>

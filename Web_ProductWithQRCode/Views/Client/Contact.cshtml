@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Liên hệ";
+    ViewBag.Active = "none";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+<div class="ybc_full_bg_breadcrum">
+    <div class="container">
+        <div class="breadcrumb clearfix">
+            <a class="home" href="/digital/" title="Return to Home">Trang chủ</a>
+            <span class="navigation-pipe">&gt;</span>
+            Liên hệ
+        </div>
+    </div>
+</div>
+<div id="columns" class="container">
+    <div class="row">
+        <div id="center_column" class="center_column col-xs-12 col-sm-12">
+            <h4 class="title_block title_block_home">
+                Liên hệ với chúng tôi
+            </h4>
+            <form action="/digital/en/contact-us?YBC_TC_CONTACT_FORM_LAYOUT=layout1" method="post" class="contact-form-box" enctype="multipart/form-data">
+                <div>
+                    <div class="row">
+                        <div class="clearfix">
+                            <div class="col-xs-12 contact_infor">
+                                <p>Gửi liên hệ cho chúng tôi và chúng tôi sẽ trả lời bạn trong thời gian sớm nhất.</p>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 embe_map_contact">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3593.090540524932!2d-80.19896688503198!3d25.767572814646492!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9b6823bb65e3b%3A0xf45950e4a4f33bbd!2sPrestaShop!5e0!3m2!1sen!2s!4v1476518709865" width="2000" height="350" style="border:0;"></iframe>
+                            </div>
+
+                            <div class="col-xs-12 ybc_delay03 col-md-6">
+                                <p class="form-group">
+                                    <label for="email">Họ tên</label>
+                                    <input class="form-control grey validate" type="text" id="email" name="from" value="">
+                                </p>
+                                <p class="form-group">
+                                    <label for="email">Email</label>
+                                    <input class="form-control grey validate" type="email" id="email" name="from" data-validate="isEmail" value="">
+                                </p>
+                                <div id="contact_reference" class="form-group selector1">
+                                    <label>Chủ đề</label>
+                                    <input class="form-control grey" type="text" name="id_order" id="id_order" value="">
+                                </div>
+                                <div class="form-group message_contact">
+                                    <textarea class="form-control" id="message" placeholder="Nội dung" name="message"></textarea>
+                                </div>
+                                <div class="submit">
+                                    <button type="submit" name="submitMessage" id="submitMessage" class="button btn btn-default button-medium"><span>Send Email</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact_store_information contact_store_information_default">
+                            <ul class="contact_store_information_list">
+                                <li class="contact_store_information_item">
+                                    <div class="contact_store_information_left"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+                                    <div class="contact_store_information_right">
+                                        <label>Địa chỉ:</label>
+                                        <div class="content">
+                                            211A Tân Sơn , F 15 , Quận Tân Bình, Tp.HCM,Việt Nam
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="contact_store_information_item">
+                                    <div class="contact_store_information_left"><i class="fa fa-phone" aria-hidden="true"></i></div>
+                                    <div class="contact_store_information_right">
+                                        <label>Điện thoại:</label>
+                                        <div class="content">
+                                            (+84)-8-3815.2833
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="contact_store_information_item">
+                                    <div class="contact_store_information_left"><i class="fa fa-envelope-o" aria-hidden="true"></i></div>
+                                    <div class="contact_store_information_right">
+                                        <label>Email:</label>
+                                        <div class="content">
+                                            ducthuan@tptdental.vn
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div><!-- #center_column -->
+    </div><!-- .row -->
+</div>

@@ -1,0 +1,207 @@
+﻿<div class="content">
+    <div class="container">
+        <!-- Page-Title -->
+        <div class="row">
+            <div class="col-sm-12">
+                <h4 class="page-title">Danh sách sản phẩm</h4>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="/">Trang chủ</a>
+                    </li>
+                    <li>
+                        <a href="#">Sản phẩm</a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+        <div class="row">
+            <form ng-submit="insert()" name="frm_insert">
+                <div class="col-sm-9">
+                    <div class="panel panel-border panel-info">
+                        <div class="panel-heading"></div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-lg-12">Tiêu đề sản phẩm<font style="color:red; margin-left:3px">(*)</font></div>
+                                    <div class="col-sm-12">
+                                        <input ng-model="Name" name="Name" type="text" class="form-control" placeholder="Nhập tiêu đề tại đây" ng-change="getMeta(Name)" required />
+                                        <span class="error" ng-show="(frm_insert.Name.$touched && frm_insert.Name.$invalid && frm_insert.Name.$error.required)">
+                                            Vui lòng nhập tên sản phẩm!!
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-12">Đường dẫn tĩnh<font style="color:red; margin-left:3px">(*)</font></div>
+                                    <div class="col-sm-12">
+                                        <input ng-model="Meta" name="Meta" type="text" class="form-control" placeholder="Nhập tiêu đề tại đây" required />
+                                        <span class="error" ng-show="(frm_insert.Meta.$touched && frm_insert.Meta.$invalid && frm_insert.Meta.$error.required)">
+                                            Vui lòng nhập đường dẫn tĩnh!!
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-12">Thông tin chi tiết</div>
+                                    <div class="col-sm-12">
+                                        <div id="Content" ckeditor="options" ng-model="Content"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-12">Thông số kỹ thuật</div>
+                                    <div class="col-sm-12">
+                                        <div id="digital" ckeditor="options" ng-model="Digital"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-12">Mô tả ngắn</div>
+                                    <div class="col-sm-12">
+                                        <textarea ng-model="Intro" id="intro_content" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="panel panel-border panel-custom">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Đăng sản phẩm</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-sm-12">Lựa chọn ngôn ngữ</div>
+                                <div class="col-sm-12">
+                                    <select id="selectLang" class="form-control" onchange="angular.element(this).scope().selectLang(this.value)">
+                                        <option value="1">Tiếng Việt</option>
+                                        <option value="2">Tiếng Anh</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-12">Trạng thái</div>
+                                <div class="col-sm-12">
+                                    <select id="status" class="form-control">
+                                        <option value="1">Xuất hiện</option>
+                                        <option value="0">Ẩn</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-12">Ngày đăng: {{today | date:'dd/MM/yyyy'}}</label>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <button type="submit" class="btn btn-success">Đăng sản phẩm</button>
+                        </div>
+                    </div>
+                    <div class="panel panel-border panel-custom">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Danh mục</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <form class="form-horizontal">
+                                        <div class="form-group" style="margin-left:-5px; margin-right:-5px">
+                                            <div class="input-group">
+                                                <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+                                                <input type="text" class="form-control" placeholder="Search" ng-model="searchCate">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="checkbox checkbox-custom" dir-paginate="item in LIST_CATEGORIES | filter:searchCate | itemsPerPage:5">
+                                        <input id="chk-{{item.ID}}" checklist-model="list_cate" checklist-value="item" ng-change="getCate(item, checked)" type="checkbox">
+                                        <label for="chk-{{item.ID}}" ng-bind="item.Name"></label>
+                                    </div>
+                                    <dir-pagination-controls style="float:inherit"></dir-pagination-controls>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-border panel-custom">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Giá sản phẩm</h3>
+                        </div>
+                        <div class="panel-body" style="display: block;">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label>Giá bán:</label>
+                                    <input type="text" ng-model="Price" format="number" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Giá khuyến mãi:</label>
+                                    <input type="text" ng-model="Discount" ng-change="comparePrice()" format="number" class="form-control" />
+                                    <span class="error" ng-show="price_error"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-border panel-custom">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Từ khóa sản phẩm</h3>
+                        </div>
+                        <div class="panel-body" style="display: block;">
+                            <div class="input-group input-group-sm">
+                                <input type="text" class="form-control" ng-model="tag">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-info btn-flat" ng-click="addKeyword()">Thêm</button>
+                                </span>
+                            </div>
+                            <ul class="tag-list">
+                                <div ng-repeat="item in keyword track by $index">
+                                    <a>
+                                        <span ng-bind="item.name"></span><span class="glyphicon glyphicon-remove" style="font-size:10px; margin-left:10px;cursor:pointer" ng-click="del_keyword(item)"></span>
+                                    </a>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel panel-border panel-custom">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">QR code</h3>
+                        </div>
+                        <div class="panel-body">
+                            <qr text="Meta" type-number="5" correction-level="'M'" href="{{var}}" size="150" image="true" download="qrcode.png"></qr>
+                        </div>
+                    </div>
+                    <div class="panel panel-border panel-custom">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Ảnh đại diện</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-sm-12">
+                                <img id="Image" ng-src="{{image}}" class="img-responsive" />
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <button type="button" class="btn btn-primary" ng-click="BrowseImage()">Duyệt ảnh</button>
+                        </div>
+                    </div>
+                    <div class="panel panel-border panel-custom">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Thư viện ảnh sản phẩm</h3>
+                        </div>
+                        <div class="panel-body multi-img-widget" style="display: block;">
+                            <div ng-repeat="img in imageList track by $index" class="panel panel-default ng-scope" style="padding-bottom: 8px;text-align: center;">
+                                <img id="Image{{$index}}" ng-src="{{img}}" class="img-responsive" />
+                                <a href="#" class="ng-scope" ng-click="event.editImg($index)">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                                <a href="#" class="ng-scope" ng-click="event.delImg($index)">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <button type="button" class="btn btn-primary" ng-click="BrowseServer()">Duyệt ảnh</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<flash-message>
+    <div class="my-flash"></div>
+</flash-message>
